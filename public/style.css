@@ -1,21 +1,20 @@
 :root {
-  --primary-bg: #0a192f;
-  --secondary-bg: #112240;
-  --accent-blue: #00aeef;
-  /* Cloud9 Electric Blue */
-  --accent-glow: rgba(0, 174, 239, 0.5);
-  --accent-cyan: #00d4ff;
+  --primary-bg: #000000; /* Black */
+  --secondary-bg: #0a0a0a;
+  --accent-blue: #0055ff; /* Giantx Electric Blue */
+  --accent-glow: rgba(0, 85, 255, 0.5);
+  --accent-cyan: #00aaff;
   --text-white: #ffffff;
-  --text-dim: #a8b2d1;
-  --button-bg: rgba(0, 174, 239, 0.1);
-  --button-hover: rgba(0, 174, 239, 0.2);
+  --text-dim: #a0a0a0;
+  --button-bg: rgba(0, 85, 255, 0.1);
+  --button-hover: rgba(0, 85, 255, 0.2);
   --card-bg: rgba(255, 255, 255, 0.03);
-  --gradient-primary: linear-gradient(135deg, #00aeef 0%, #00d4ff 100%);
-  --gradient-dark: linear-gradient(180deg, #0a192f 0%, #0d2847 100%);
+  --gradient-primary: linear-gradient(135deg, #0055ff 0%, #00aaff 100%);
+  --gradient-dark: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
 }
 
-/* ==================== CLOUD9 HEADER ==================== */
-.cloud9-header {
+/* ==================== GIANTX HEADER ==================== */
+.giantx-header {
   width: 100%;
   padding: 1.5rem 0;
   display: flex;
@@ -25,7 +24,7 @@
   position: relative;
 }
 
-.cloud9-header::after {
+.giantx-header::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -36,14 +35,14 @@
   background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
 }
 
-.cloud9-logo {
+.giantx-logo {
   height: 35px;
   width: auto;
   filter: drop-shadow(0 0 15px var(--accent-glow));
   transition: all 0.3s ease;
 }
 
-.cloud9-logo:hover {
+.giantx-logo:hover {
   filter: drop-shadow(0 0 25px var(--accent-blue));
   transform: scale(1.05);
 }

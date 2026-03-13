@@ -65,7 +65,7 @@ console.log('📊 Base de datos SQLite inicializada');
 
 // Función para guardar email con consentimiento
 function saveEmailWithConsent(email, consent, ipAddress, role, style, favoritePlayer, showInGallery, imageName) {
-  const CONSENT_TEXT = 'I agree to receive my poster via email and communications from Cloud9';
+  const CONSENT_TEXT = 'I agree to receive my poster via email and communications from Giantx';
 
   if (!consent) {
     console.log('⚠️ Usuario no dio consentimiento, email no guardado');
@@ -129,15 +129,15 @@ async function sendPosterEmail(toEmail, imageDataBase64) {
       body: JSON.stringify({
         sender: { name: "Roster Moment", email: senderEmail },
         to: [{ email: toEmail }],
-        subject: "Your Roster Moment is here! 🏆",
+        subject: "Your Giantx Roster Moment is here! 🏆",
         htmlContent: `
           <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #0099ff;">Hi! Here is your epic Cloud9 poster.</h2>
-            <p>We hope you like it! You can share this epic moment on your social media. Don't forget to tag <strong>@Cloud9</strong> and use <strong>#RosterMoment</strong>!</p>
+            <h2 style="color: #0055ff;">Hi! Here is your epic Giantx poster.</h2>
+            <p>We hope you like it! You can share this epic moment on your social media. Don't forget to tag <strong>@Giantx</strong> and use <strong>#RosterMoment</strong>!</p>
             <p>Thanks for your support!</p>
             <br>
-            <p><strong>The Cloud9 Team</strong></p>
-            <img src="https://cloud9-roster-moment.onrender.com/cloud9-logo.png" alt="Cloud9" style="width: 100px; margin-top: 10px;">
+            <p><strong>The Giantx Team</strong></p>
+            <img src="https://giantx-roster-moment.onrender.com/giantx-logo.png" alt="Giantx" style="width: 100px; margin-top: 10px;">
           </div>
         `,
         attachment: [
@@ -226,7 +226,7 @@ Vertical orientation, 4:5 aspect ratio.`;
     'Painted Hype': `
 STYLE: Masterpiece Esports Digital Illustration.
 - Technique: Thick, expressive oil-painting style with visible palette knife textures and bold brush strokes.
-- Color Palette: Dominant Cloud9 blues (deep navy to electric cyan), crisp whites, and cinematic warm orange/gold highlights for contrast.
+- Color Palette: Dominant Giantx colors (deep black, crisp white, and electric blue), and cinematic warm orange/gold highlights for contrast.
 - Lighting: Intense, dramatic "Rembrandt" lighting on faces. High-contrast chiaroscuro effect.
 - Energy: Dynamic paint splashes, ethereal energy wisps, and motion-blurred paint fragments exploding from the subjects.
 - Atmosphere: A fusion of a high-tech arena and a dreamlike artistic void. No flat backgrounds.
@@ -237,17 +237,17 @@ STYLE: Elite Esports Victory Celebration.
 - Subjects: Intense, emotional expressions. Everyone is visibly excited, shouting in joy, or cheering. 
 - Posture: Dynamic and triumphant—arms raised, fists pumped, leaning forward as if celebrating a championship point.
 - Lighting: Aggressive neon rim lighting, cinematic lens flares, and volumetric spotlights dancing across the arena.
-- Background: A high-tech futuristic esports arena stadium at the peak of a grand final. Holographic Cloud9 banners and digital confetti in the air.
+- Background: A high-tech futuristic esports arena stadium at the peak of a grand final. Holographic Giantx banners and digital confetti in the air.
 - Visual Effects: Floating data particles, electrical sparks, and vibrant energy streaks that amplify the hype.
 - Texture: Sharp, clean, and high-definition.
 - Atmosphere: Pure victory, adrenaline, and hype.
-- Colors: Electrified cyan, deep space black, and brilliant white flashes.`,
+- Colors: Electrified blue, deep night black, and brilliant white flashes.`,
 
     'Social Media Avatar': `
 INDIVIDUAL PORTRAIT TASK:
 - FOCUS ONLY ON IMAGE 1 (The Fan). Ignore all other player images.
 - Subject: The Fan from Image 1, facing forward, confident posture with arms crossed.
-- Clothing: Wearing a high-quality, realistic Cloud9 esports jersey.
+- Clothing: Wearing a high-quality, realistic Giantx esports jersey.
 - Style: Photorealistic, clean, sharp focus.
 - Background: Neutral, studio-like professional background (blurred or solid clean color).
 - Composition: Waist-up shot, centered, perfect for social media profile pictures.
@@ -261,11 +261,11 @@ AVOID:
 - Generic faces
 - More than 1 person if 'Social Media Avatar' is selected
 - Photorealistic collage (unified artwork required)
-- Text that is not "Cloud9"
+- Text that is not "Giantx"
 - Mismatched lighting`;
 
   return `CRITICAL: STRICT IDENTITY PRESERVATION MODE.
-DO NOT USE ANY PRE-TRAINED KNOWLEDGE OF CLOUD9 PLAYERS.
+DO NOT USE ANY PRE-TRAINED KNOWLEDGE OF GIANTX PLAYERS.
 ONLY USE THE PROVIDED IMAGES (Image 2 to ${playersCount + 1}) FOR THE PRO PLAYERS' FACES.
 The faces in the final image MUST be exact artistic representations of the provided photos. 
 IGNORE any famous faces you might know and stick ONLY to the visual blueprints provided in the input images.
@@ -412,7 +412,7 @@ app.post('/generate', async (req, res) => {
             throw writeError; // Re-throw to trigger catch block
           }
 
-          imageUrl = `https://cloud9-roster-moment.onrender.com/generated/${fileName}`;
+          imageUrl = `https://giantx-roster-moment.onrender.com/generated/${fileName}`;
           console.log('Image saved and accessible at public URL:', imageUrl);
 
           // Enviar email automáticamente (SIN AWAIT para no bloquear la respuesta)

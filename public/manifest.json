@@ -1,11 +1,11 @@
 {
-  "name": "Roster Moment",
+  "name": "Giantx Roster Moment",
   "short_name": "Roster",
-  "description": "Create your epic poster with the Cloud9 team",
+  "description": "Create your epic poster with the Giantx team",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a192f",
-  "theme_color": "#0a192f",
+  "background_color": "#000000",
+  "theme_color": "#000000",
   "icons": [
     {
       "src": "/logo-roster-moment.png",

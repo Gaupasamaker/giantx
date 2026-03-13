@@ -14,20 +14,20 @@ let state = {
   generatedImageName: null
 };
 
-// Datos de jugadores Cloud9
-const API_BASE = 'https://cloud9-roster-moment.onrender.com';
+// Datos de jugadores Giantx
+const API_BASE = 'https://giantx-roster-moment.onrender.com';
 const PLAYERS = [
-  { id: 'player1', name: 'Thanatos', role: 'Top', image: `${API_BASE}/api/players/player1.webp` },
-  { id: 'player2', name: 'Blaber', role: 'Jungle', image: `${API_BASE}/api/players/player2.webp` },
-  { id: 'player3', name: 'Zven', role: 'Mid', image: `${API_BASE}/api/players/player3.webp` },
-  { id: 'player4', name: 'APA', role: 'ADC', image: `${API_BASE}/api/players/player4.webp` },
-  { id: 'player5', name: 'Vulcan', role: 'Support', image: `${API_BASE}/api/players/player5.webp` }
+  { id: 'player1', name: 'Lot', role: 'Top', image: `${API_BASE}/api/players/player1.png` },
+  { id: 'player2', name: 'Closer', role: 'Jungle', image: `${API_BASE}/api/players/player2.png` },
+  { id: 'player3', name: 'Jackies', role: 'Mid', image: `${API_BASE}/api/players/player3.png` },
+  { id: 'player4', name: 'Noah', role: 'ADC', image: `${API_BASE}/api/players/player4.png` },
+  { id: 'player5', name: 'Jun', role: 'Support', image: `${API_BASE}/api/players/player5.png` }
 ];
 
-// Header con logo Cloud9 que aparece en todas las pantallas
+// Header con logo Giantx que aparece en todas las pantallas
 const headerComponent = () => `
-  <header class="cloud9-header">
-    <img src="/cloud9-logo.svg" alt="Cloud9" class="cloud9-logo">
+  <header class="giantx-header">
+    <img src="/giantx-logo.png" alt="Giantx" class="giantx-logo">
   </header>
 `;
 
@@ -130,7 +130,7 @@ const screens = {
         
         <label class="consent-label">
           <input type="checkbox" id="consentCheckbox" ${state.consent ? 'checked' : ''} onchange="handleConsent(event)">
-          <span class="consent-text">I agree to receive my poster via email and communications from Cloud9</span>
+          <span class="consent-text">I agree to receive my poster via email and communications from Giantx</span>
         </label>
         
         <label class="consent-label">
@@ -148,7 +148,7 @@ const screens = {
     ${headerComponent()}
     <div class="screen generating-screen">
       <div class="loader-container">
-        <img src="/cloud9-logo.svg" alt="Cloud9" class="loader-logo">
+        <img src="/giantx-logo.png" alt="Giantx" class="loader-logo">
         <div class="loader-ring"></div>
       </div>
       <div class="generating-text" id="generating-text">Initializing AI</div>
@@ -177,9 +177,9 @@ const screens = {
 
     const qrUrl = state.generatedImage && !state.generatedImage.startsWith('data:')
       ? state.generatedImage
-      : `https://cloud9-roster-moment.onrender.com/generated/${state.generatedImageName || ''}`;
+      : `https://giantx-roster-moment.onrender.com/generated/${state.generatedImageName || ''}`;
 
-    const twitterText = encodeURIComponent(`🎮 Just joined the @Cloud9 roster! Check out my Roster Moment! 🏆\n\n#Cloud9 #Esports #RosterMoment`);
+    const twitterText = encodeURIComponent(`🎮 Just joined the @Giantx roster! Check out my Roster Moment! 🏆\n\n#Giantx #Esports #RosterMoment`);
     const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}&url=${encodeURIComponent(qrUrl)}`;
 
     return `
@@ -328,7 +328,7 @@ window.downloadImage = () => {
 
 // Compartir en Instagram (copiar texto y mostrar instrucciones)
 window.shareInstagram = () => {
-  const instagramText = `🎮 Just joined the @cloud9 roster! Check out my Roster Moment! 🏆\n\n#Cloud9 #Esports #RosterMoment #Gaming`;
+  const instagramText = `🎮 Just joined the @giantx roster! Check out my Roster Moment! 🏆\n\n#Giantx #Esports #RosterMoment #Gaming`;
 
   navigator.clipboard.writeText(instagramText).then(() => {
     alert('✅ Caption copied to clipboard!\n\n1. Download your image using the Download button\n2. Open Instagram and create a new post\n3. Select your poster image\n4. Paste the caption (Ctrl+V / Cmd+V)');
@@ -338,13 +338,13 @@ window.shareInstagram = () => {
 };
 
 // Configuración de la API - URL de Render para producción
-const API_URL = 'https://cloud9-roster-moment.onrender.com';
+const API_URL = 'https://giantx-roster-moment.onrender.com';
 
 // Mensajes dinámicos para la pantalla de carga
 const LOADING_MESSAGES = [
   { text: 'Initializing AI', subtitle: 'Preparing your epic moment...' },
   { text: 'Mixing pixels', subtitle: 'Creating visual magic...' },
-  { text: 'Adding Cloud9 energy', subtitle: 'Channeling team spirit...' },
+  { text: 'Adding Giantx energy', subtitle: 'Channeling team spirit...' },
   { text: 'Rendering your moment', subtitle: 'Almost there...' },
   { text: 'Final touches', subtitle: 'Perfecting your poster...' }
 ];
