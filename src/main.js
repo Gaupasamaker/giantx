@@ -14,11 +14,15 @@ let state = {
   generatedImageName: null
 };
 
-// Datos de jugadores Giantx
-const API_BASE = 'https://giantx-roster-moment.onrender.com';
+// Configuración dinámica de la API (local vs producción)
+const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const API_BASE = isLocal 
+  ? 'http://localhost:3001' 
+  : 'https://giantx-roster-moment.onrender.com';
+
 const PLAYERS = [
   { id: 'player1', name: 'Lot', role: 'Top', image: `${API_BASE}/api/players/player1.png` },
-  { id: 'player2', name: 'Closer', role: 'Jungle', image: `${API_BASE}/api/players/player2.png` },
+  { id: 'player2', name: 'Isma', role: 'Jungle', image: `${API_BASE}/api/players/player2.png` },
   { id: 'player3', name: 'Jackies', role: 'Mid', image: `${API_BASE}/api/players/player3.png` },
   { id: 'player4', name: 'Noah', role: 'ADC', image: `${API_BASE}/api/players/player4.png` },
   { id: 'player5', name: 'Jun', role: 'Support', image: `${API_BASE}/api/players/player5.png` }
@@ -177,7 +181,7 @@ const screens = {
 
     const qrUrl = state.generatedImage && !state.generatedImage.startsWith('data:')
       ? state.generatedImage
-      : `https://giantx-roster-moment.onrender.com/generated/${state.generatedImageName || ''}`;
+      : `${API_BASE}/generated/${state.generatedImageName || ''}`;
 
     const twitterText = encodeURIComponent(`🎮 Just joined the @Giantx roster! Check out my Roster Moment! 🏆\n\n#Giantx #Esports #RosterMoment`);
     const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}&url=${encodeURIComponent(qrUrl)}`;
@@ -337,8 +341,8 @@ window.shareInstagram = () => {
   });
 };
 
-// Configuración de la API - URL de Render para producción
-const API_URL = 'https://giantx-roster-moment.onrender.com';
+// Configuración de la API
+const API_URL = API_BASE;
 
 // Mensajes dinámicos para la pantalla de carga
 const LOADING_MESSAGES = [
@@ -387,6 +391,7 @@ window.nextScreen = async () => {
     try {
       if (statusLog) statusLog.innerText = `Connecting to the AI server...`;
 
+      console.log('DEBUG: Fetching from:', `${API_URL}/generate`);
       const response = await fetch(`${API_URL}/generate`, {
         method: 'POST',
         headers: {

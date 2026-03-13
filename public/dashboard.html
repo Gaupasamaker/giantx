@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cloud9 Roster Moment - Live Dashboard</title>
+  <title>Giantx Roster Moment - Live Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Montserrat:wght@400;700&display=swap"
@@ -12,10 +12,10 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root {
-      --primary-bg: #0a192f;
-      --accent-blue: #00aeef;
-      --accent-cyan: #00d4ff;
-      --text-white: #e6f1ff;
+      --primary-bg: #000000;
+      --accent-blue: #0055ff;
+      --accent-cyan: #00aaff;
+      --text-white: #ffffff;
       --text-dim: rgba(255, 255, 255, 0.6);
     }
 
@@ -107,7 +107,7 @@
 
 <body>
   <div class="header">
-    <img src="/logo-roster-moment.png" alt="Cloud9">
+    <img src="/giantx-logo.png" alt="Giantx">
     <h1>Live Event Dashboard</h1>
   </div>
 
@@ -144,12 +144,12 @@
   <script>
     const API_URL = window.location.hostname === 'localhost'
       ? 'http://localhost:3001'
-      : 'https://cloud9-roster-moment.onrender.com';
+      : 'https://giantx-roster-moment.onrender.com';
 
     let roleChart, styleChart, playerChart;
 
     const chartColors = [
-      '#00aeef', '#00d4ff', '#3d8bfd', '#6610f2', '#e83e8c'
+      '#0055ff', '#00aaff', '#3d8bfd', '#6610f2', '#e83e8c'
     ];
 
     const chartOptions = {
@@ -211,7 +211,7 @@
         // Defined categories to ensure charts always show comparison data
         const ALL_ROLES = ['Top', 'Jungle', 'Mid', 'ADC', 'Support'];
         const ALL_STYLES = ['Painted Hype', 'Hype Match Day', 'Social Media Avatar'];
-        const ALL_PLAYERS = ['Thanatos', 'Blaber', 'Zven', 'APA', 'Vulcan'];
+        const ALL_PLAYERS = ['Lot', 'Isma', 'Jackies', 'Noah', 'Jun'];
 
         // Helper to merge data with defaults
         const mergeData = (categories, incomingData, keyName) => {

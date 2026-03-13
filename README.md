@@ -1,14 +1,14 @@
-# Cloud9 Roster Moment
+# Giantx Roster Moment
 
-> **Become a Cloud9 pro! AI instantly turns your photo into a custom roster card to share and keep forever.**
+> **Become a Giantx pro! AI instantly turns your photo into a custom roster card to share and keep forever.**
 
-![Cloud9 Roster Moment Banner](public/cloud9-logo.png)
+![Giantx Roster Moment Banner](public/Giantx-logo.png)
 
 ## 📖 About The Project
 
-**Cloud9 Roster Moment** is an interactive fan engagement experience designed for live esports events. It leverages state-of-the-art Generative AI to seamlessly integrate fans into the Cloud9 professional roster.
+**Giantx Roster Moment** is an interactive fan engagement experience designed for live esports events. It leverages state-of-the-art Generative AI to seamlessly integrate fans into the Giantx professional roster.
 
-Fans simply upload a photo or take a selfie, and within seconds, they receive a high-quality, branded poster featuring themselves alongside 5 current Cloud9 pro players.
+Fans simply upload a photo or take a selfie, and within seconds, they receive a high-quality, branded poster featuring themselves alongside 5 current Giantx pro players.
 
 ### Key Features
 
@@ -41,8 +41,8 @@ This project is a monorepo containing both the Frontend (Vite) and Backend (Node
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/cloud9-roster-moment.git
-cd cloud9-roster-moment
+git clone https://github.com/yourusername/Giantx-roster-moment.git
+cd Giantx-roster-moment
 ```
 
 ### 2. Setup Backend
@@ -57,7 +57,7 @@ Create a `.env` file in the `server` directory with the following variables:
 ```env
 GOOGLE_API_KEY=your_gemini_api_key
 SMTP_PASS=your_brevo_api_key
-EMAIL_FROM=no-reply@cloud9.gg
+EMAIL_FROM=no-reply@Giantx.gg
 PORT=3001
 ```
 
@@ -97,7 +97,7 @@ This project was built for the **Google Cloud Vertex AI Agent Builder Hackathon*
 
 **Team:**
 *   Jon Llaguno
-*   Cloud9 Engineering Team (Simulated)
+*   Giantx Engineering Team (Simulated)
 
 ---
 

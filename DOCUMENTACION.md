@@ -1,7 +1,7 @@
 # 🎮 Roster Moment - Project Documentation (Hackathon MVP)
 
 ## 1. Motivation and Vision
-**Roster Moment** is an application designed to elevate the fan experience at in-person esports events (specifically for **Cloud9**). The idea arises from the need to emotionally connect followers with their idols in an innovative and shareable way.
+**Roster Moment** is an application designed to elevate the fan experience at in-person esports events (specifically for **Giantx**). The idea arises from the need to emotionally connect followers with their idols in an innovative and shareable way.
 
 The application allows a fan to take a photograph and, through state-of-the-art generative Artificial Intelligence, be integrated into an epic poster alongside the team's professional players, receiving the result instantly on their mobile and by email.
 
@@ -24,7 +24,7 @@ To build this MVP in record time and with high fidelity, we have selected leadin
 ## 3. Key Features Delivered
 
 ### 📸 AI Roster Generation
-- users upload their photo and get seamlessly integrated into a Cloud9 roster.
+- users upload their photo and get seamlessly integrated into a Giantx roster.
 - Multiple styles: "Painted Hype" (Artistic), "Match Day" (Realistic), and "Social Media Avatar".
 
 ### 📊 Live Event Dashboard
@@ -40,7 +40,7 @@ To build this MVP in record time and with high fidelity, we have selected leadin
 
 ### 📧 Branded Email Delivery
 - Automated email dispatch with the generated poster as an attachment.
-- Rich HTML template featuring the official **Cloud9 logo** (converted to PNG for maximum compatibility).
+- Rich HTML template featuring the official **Giantx logo** (converted to PNG for maximum compatibility).
 - GDPR-compliant consent tracking.
 
 ---
@@ -57,7 +57,7 @@ To build this MVP in record time and with high fidelity, we have selected leadin
 
 ### C. Cloud Email Blocking
 *   **Problem:** Render servers block standard SMTP traffic.
-*   **Solution:** Migrated to **Brevo REST API**. By sending the email through HTTPS, we bypass port blocks. We also secured the Cloud9 logo by serving it as a static PNG asset from our own server to prevent broken image links in emails.
+*   **Solution:** Migrated to **Brevo REST API**. By sending the email through HTTPS, we bypass port blocks. We also secured the Giantx logo by serving it as a static PNG asset from our own server to prevent broken image links in emails.
 
 ### D. Visual Consistency & Artefacts
 *   **Problem:** Emojis in page titles caused rendering artifacts (blue boxes) on some displays.
@@ -67,7 +67,7 @@ To build this MVP in record time and with high fidelity, we have selected leadin
 
 ## 5. Asset Generation & Brand Identity
 Using Gemini, we created a complete suite of promotional materials to support the product launch:
-*   **Hero Banners:** Cinematic compositions of the Cloud9 roster.
+*   **Hero Banners:** Cinematic compositions of the Giantx roster.
 *   **Social Media Kit:** Avatars and headers optimized for Twitter/X.
 *   **Brand Styling:** A cohesive dark-mode palette (`#0a192f` background, `#00aeef` accents) applied consistently across the App, Dashboard, and Gallery.
 

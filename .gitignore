@@ -25,3 +25,13 @@ dist-ssr
 
 .env
 server/.env
+
+# Giantx specific
+public/generated/
+server/data/
+server/*.log
+server/test-*.js
+server/list-models*.js
+server/models.json
+server/simulate-client.js
+server/test-payload.js

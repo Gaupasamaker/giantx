@@ -25,6 +25,11 @@ const LOCAL_IP = getLocalIP();
 
 dotenv.config();
 
+console.log('DEBUG: GOOGLE_API_KEY loaded:', process.env.GOOGLE_API_KEY ? 'Yes (Length: ' + process.env.GOOGLE_API_KEY.length + ')' : 'No');
+if (process.env.GOOGLE_API_KEY) {
+  console.log('DEBUG: API Key starting with:', process.env.GOOGLE_API_KEY.substring(0, 7));
+}
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -32,6 +37,7 @@ const app = express();
 const PORT = 3001;
 
 // Inicializar Google AI
+console.log('DEBUG: Initializing Google AI with key...');
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 
 // ==================== BASE DE DATOS SQLITE ====================
@@ -210,48 +216,44 @@ MANDATORY ROLE ASSIGNMENT:
 - IMAGE 1 IS THE PRIMARY PROTAGONIST (The Fan). You MUST include this person as the central focus of the image. This is NON-NEGOTIABLE.
 - IMAGES 2 to ${playersCount + 1} ARE THE SECONDARY TEAMMATES (The Pro Players).`;
 
-  // Prompt base original adaptado para composición multimodal
-  const basePrompt = `A high-impact esports poster composition featuring ${playersCount + 1} people total:
+  // Prompt base original adaptado para composición multimodal con LÍMITE ESTRICTO
+  const basePrompt = `A high-impact esports poster composition featuring EXACTLY ${playersCount + 1} unique individuals.
+- TOTAL PEOPLE COUNT: STICK TO EXACTLY ${playersCount + 1} PEOPLE. NO MORE, NO LESS.
 - THE FAN (Image 1): Central subject, foreground, largest scale. The entire poster revolves around this person.
-- ${playersCount} PROFESSIONAL PLAYERS (Images 2 to ${playersCount + 1}): Arranged around the fan.
+- ${playersCount} UNIQUE PROFESSIONAL PLAYERS (Images 2 to ${playersCount + 1}): Arranged around the fan.
+- OFFICIAL JERSEY REFERENCE (Last Image): Use this image as the ABSOLUTE visual blueprint for the uniforms.
+  
+MANDATORY: Every person in the generated image must be wearing the EXACT jersey shown in the Last Image (Official Jersey Reference). Match the blue and black stripes, the "GX" logo, and the white details perfectly.`;
 
-The fan is positioned at the exact center of the image, slightly forward, as the clear visual protagonist.
-The players are arranged in a cinematic, staggered ensemble composition.
-
-All subjects are fully integrated into the same visual style.
-The fan is wearing an official Cloud9 esports jersey.
-Vertical orientation, 4:5 aspect ratio.`;
+  const jerseyDescription = `Wearing the official Giantx esports jersey: a high-performance pro-kit with thick vertical stripes in a pattern of electric blue and deep ink black. The chest features a prominent white hexagonal "GX" emblem in the center, with the "GIANTX" brand name in sharp white futuristic typography below it. The jersey has distinct thin white accent lines along the shoulders and a professional black V-neck collar.`;
 
   const stylePrompts = {
     'Painted Hype': `
 STYLE: Masterpiece Esports Digital Illustration.
+- Clothing: ${jerseyDescription}
 - Technique: Thick, expressive oil-painting style with visible palette knife textures and bold brush strokes.
-- Color Palette: Dominant Giantx colors (deep black, crisp white, and electric blue), and cinematic warm orange/gold highlights for contrast.
-- Lighting: Intense, dramatic "Rembrandt" lighting on faces. High-contrast chiaroscuro effect.
-- Energy: Dynamic paint splashes, ethereal energy wisps, and motion-blurred paint fragments exploding from the subjects.
-- Atmosphere: A fusion of a high-tech arena and a dreamlike artistic void. No flat backgrounds.
-- Subjects: Faces must be recognizable but rendered with artistic soul. The fan should look heroic and integrated into the paint texture.`,
+- Color Palette: Dominant Giantx colors (deep black, electric blue), with cinematic highlights.
+- Lighting: Intense, dramatic "Rembrandt" lighting on faces.
+- Energy: Dynamic paint splashes and energy wisps.
+- Atmosphere: A fusion of a high-tech arena and a dreamlike artistic void.`,
 
     'Hype Match Day': `
 STYLE: Elite Esports Victory Celebration.
-- Subjects: Intense, emotional expressions. Everyone is visibly excited, shouting in joy, or cheering. 
-- Posture: Dynamic and triumphant—arms raised, fists pumped, leaning forward as if celebrating a championship point.
-- Lighting: Aggressive neon rim lighting, cinematic lens flares, and volumetric spotlights dancing across the arena.
-- Background: A high-tech futuristic esports arena stadium at the peak of a grand final. Holographic Giantx banners and digital confetti in the air.
-- Visual Effects: Floating data particles, electrical sparks, and vibrant energy streaks that amplify the hype.
-- Texture: Sharp, clean, and high-definition.
-- Atmosphere: Pure victory, adrenaline, and hype.
-- Colors: Electrified blue, deep night black, and brilliant white flashes.`,
+- Clothing: ${jerseyDescription}
+- Subjects: Intense, emotional expressions of joy and victory. 
+- Posture: Dynamic and triumphant—arms raised, celebrating a win.
+- Lighting: Aggressive neon rim lighting and volumetric spotlights.
+- Background: A high-tech futuristic esports arena stadium at the peak of a grand final.
+- Visual Effects: Floating data particles and vibrant energy streaks.`,
 
     'Social Media Avatar': `
 INDIVIDUAL PORTRAIT TASK:
-- FOCUS ONLY ON IMAGE 1 (The Fan). Ignore all other player images.
-- Subject: The Fan from Image 1, facing forward, confident posture with arms crossed.
-- Clothing: Wearing a high-quality, realistic Giantx esports jersey.
+- FOCUS ONLY ON IMAGE 1 (The Fan).
+- Clothing: ${jerseyDescription}
+- Subject: The Fan from Image 1, facing forward, professional and confident.
 - Style: Photorealistic, clean, sharp focus.
-- Background: Neutral, studio-like professional background (blurred or solid clean color).
-- Composition: Waist-up shot, centered, perfect for social media profile pictures.
-- Likeness: Maximum fidelity to the fan's facial features.`
+- Background: Neutral, premium studio background.
+- Composition: Waist-up shot, centered, perfect for profile pictures.`
   };
 
   const selectedStyle = stylePrompts[style] || stylePrompts['Painted Hype'];
@@ -259,12 +261,18 @@ INDIVIDUAL PORTRAIT TASK:
   const negativePrompt = `
 AVOID:
 - Generic faces
+- Extra faces not corresponding to input images
+- Duplicating people
 - More than 1 person if 'Social Media Avatar' is selected
 - Photorealistic collage (unified artwork required)
 - Text that is not "Giantx"
 - Mismatched lighting`;
 
-  return `CRITICAL: STRICT IDENTITY PRESERVATION MODE.
+  return `CRITICAL: GENERATE A NEW IMAGE. 
+STRICT IDENTITY PRESERVATION MODE.
+DO NOT SIMPLY RETURN OR ALTER THE PROVIDED IMAGES. 
+YOU MUST CREATE A COMPLETE, UNIFIED DIGITAL ARTWORK FROM SCRATCH USING THE PROVIDED FACES AS THE ONLY VISUAL REFERENCE FOR THE SUBJECTS.
+
 DO NOT USE ANY PRE-TRAINED KNOWLEDGE OF GIANTX PLAYERS.
 ONLY USE THE PROVIDED IMAGES (Image 2 to ${playersCount + 1}) FOR THE PRO PLAYERS' FACES.
 The faces in the final image MUST be exact artistic representations of the provided photos. 
@@ -280,28 +288,32 @@ ${selectedStyle}
 ${negativePrompt}`;
 }
 
-// Endpoint principal
-app.post('/generate', async (req, res) => {
+// Endpoint principal (soporta tanto /generate como /api/generate)
+app.post(['/generate', '/api/generate'], async (req, res) => {
   const { role, style, email, photo, consent, favoritePlayer, showInGallery } = req.body;
-
-  // Obtener IP del cliente para cumplimiento GDPR
   const clientIP = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
 
-  console.log('=== New Request ===');
-  console.log('Role:', role);
-  console.log('Style:', style);
-  console.log('Email:', email);
-  console.log('Favorite Player:', favoritePlayer);
-  console.log('Consent:', consent ? 'Yes' : 'No');
-  console.log('Show in Gallery:', showInGallery ? 'Yes' : 'No');
-  console.log('Photo received:', photo ? 'Yes' : 'No');
+  const log = (msg) => {
+    const entry = `[${new Date().toISOString()}] ${msg}\n`;
+    console.log(msg); // Mantener en terminal también
+    fs.appendFileSync('server.log', entry);
+  };
+
+  log(`--- NEW REQUEST START ---`);
+  log(`Role: ${role}, Style: ${style}, Email: ${email}`);
+  log(`Favorite Player: ${favoritePlayer}, Consent: ${consent}, Gallery: ${showInGallery}`);
+  log(`Photo received: ${photo ? 'Yes' : 'No'}`);
+  if (photo) {
+    log(`Photo Length: ${photo.length}`);
+    log(`Photo Start: ${photo.substring(0, 70)}...`);
+  }
 
   // El email y la galería se guardarán después de generar la imagen para tener el nombre del archivo
   let imageName = null;
 
   try {
     const model = genAI.getGenerativeModel({
-      model: 'gemini-3-pro-image-preview'
+      model: 'gemini-3.1-flash-image-preview'
     });
 
     // 1. Cargar fotos de los jugadores desde el servidor
@@ -311,7 +323,7 @@ app.post('/generate', async (req, res) => {
 
     if (fs.existsSync(playersDir)) {
       const playerFiles = fs.readdirSync(playersDir).filter(file =>
-        ['.jpg', '.jpeg', '.png', '.webp'].includes(path.extname(file).toLowerCase())
+        !file.startsWith('.') && ['.jpg', '.jpeg', '.png', '.webp'].includes(path.extname(file).toLowerCase())
       );
 
       // Si el estilo es 'Social Media Avatar', NO añadimos jugadores para evitar confusiones.
@@ -348,13 +360,28 @@ app.post('/generate', async (req, res) => {
       // Fallback si no hay carpeta de jugadores, solo usamos la del usuario
       const base64Data = photo.split(',')[1];
       const mimeType = photo.split(';')[0].split(':')[1];
+      console.log(`User photo added via fallback. Size: ${Math.round(base64Data.length * 0.75 / 1024)} KB`);
       contentParts.push({
         inlineData: { mimeType, data: base64Data }
       });
     }
 
+    // --- NEW: Add Official Jersey Reference ---
+    const jerseyRefPath = path.join(__dirname, 'assets', 'jersey_reference.png');
+    if (fs.existsSync(jerseyRefPath)) {
+      const jerseyData = fs.readFileSync(jerseyRefPath);
+      contentParts.push({
+        inlineData: {
+          mimeType: 'image/png',
+          data: jerseyData.toString('base64')
+        }
+      });
+      log('Official Jersey Reference image added to prompt');
+    }
+
     const hasPhoto = photo && photo.startsWith('data:image');
     const prompt = generatePrompt(role, style, hasPhoto, playersCount);
+    log(`Generated Prompt: ${prompt}`);
 
     // El texto del prompt debe ser la primera parte o estar presente
     contentParts.unshift({ text: prompt });
@@ -362,13 +389,22 @@ app.post('/generate', async (req, res) => {
     console.log('Prompt sent');
     console.log('Total images sent:', contentParts.length - 1);
 
-    console.log('Sending request to Google AI...');
-    const result = await model.generateContent({
-      contents: [{ role: 'user', parts: contentParts }],
-      generationConfig: {
-        responseModalities: ['image', 'text'],
-      },
-    });
+    let result;
+    try {
+      console.log('Sending request to Google AI...');
+      result = await model.generateContent({
+        contents: [{ role: 'user', parts: contentParts }],
+        generationConfig: {
+          responseModalities: ['image', 'text'],
+        },
+      });
+    } catch (genError) {
+      log('CRITICAL: generateContent failed!');
+      log(`Error Status: ${genError.status || 'N/A'}`);
+      log(`Error Message: ${genError.message}`);
+      // Respond to client with error instead of crashing server
+      return res.status(500).json({ error: 'AI Generation failed. Please check server.log' });
+    }
 
     console.log('Response received from Google AI');
     const response = result.response;
@@ -473,7 +509,7 @@ app.get('/health', (req, res) => {
 // Endpoint para exportar emails (protegido con token simple)
 app.get('/emails', (req, res) => {
   const token = req.query.token || req.headers['x-api-token'];
-  const expectedToken = process.env.ADMIN_TOKEN || 'cloud9-admin-2026';
+  const expectedToken = process.env.ADMIN_TOKEN || 'giantx-admin-2026';
 
   if (token !== expectedToken) {
     return res.status(401).json({ error: 'Unauthorized. Provide valid token.' });
