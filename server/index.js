@@ -278,6 +278,8 @@ COMPOSITION & SETTING:
 - THE USER (IMAGE 1) IS THE CENTER OF THE UNIVERSE IN THIS IMAGE.
 - PLAYER IMAGES (2 TO ${playersCount + 1}) MUST BE ARRANGED BEHIND OR AROUND THE USER AS A SUPPORTING TEAM.
 - EVERYTHING MUST BE UNIFIED IN THE SELECTED ART STYLE.
+- PORTRAIT FORMAT: The image MUST be generated in a vertical aspect ratio, optimized for mobile viewing.
+
 
 ${style === 'Social Media Avatar' ? 'PORTRAIT TASK: FOCUS ONLY ON IMAGE 1.' : basePrompt}
 
@@ -392,11 +394,7 @@ app.post(['/generate', '/api/generate'], async (req, res) => {
     try {
       console.log('Sending request to Google AI...');
       result = await model.generateContent({
-        contents: [{ role: 'user', parts: contentParts }],
-        generationConfig: {
-          responseModalities: ['image', 'text'],
-          aspectRatio: "9:16"
-        },
+        contents: [{ role: 'user', parts: contentParts }]
       });
     } catch (genError) {
       log('CRITICAL: generateContent failed!');
