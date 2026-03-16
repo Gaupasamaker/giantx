@@ -143,7 +143,7 @@ async function sendPosterEmail(toEmail, imageDataBase64) {
             <p>Thanks for your support!</p>
             <br>
             <p><strong>The Giantx Team</strong></p>
-            <img src="https://giantx-roster-moment.onrender.com/giantx-logo.png" alt="Giantx" style="width: 100px; margin-top: 10px;">
+            <img src="https://giantx-fan-moment.onrender.com/giantx-logo.png" alt="Giantx" style="width: 100px; margin-top: 10px;">
           </div>
         `,
         attachment: [
@@ -448,7 +448,7 @@ app.post(['/generate', '/api/generate'], async (req, res) => {
             throw writeError; // Re-throw to trigger catch block
           }
 
-          imageUrl = `https://giantx-roster-moment.onrender.com/generated/${fileName}`;
+          imageUrl = `https://giantx-fan-moment.onrender.com/generated/${fileName}`;
           console.log('Image saved and accessible at public URL:', imageUrl);
 
           // Enviar email automáticamente (SIN AWAIT para no bloquear la respuesta)

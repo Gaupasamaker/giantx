@@ -77,25 +77,26 @@ const screens = {
       </div>
     </div>
   `,
-  player: () => `
+  player: () => {
+    return `
     ${headerComponent()}
     <div class="screen">
-      <h2>Pick your Favorite Player</h2>
-      <p class="subtitle-dim">Who inspires you the most?</p>
+      <h2>Select Your Teammate</h2>
+      <p class="subtitle-dim">Who is joining your roster?</p>
       <div class="player-grid">
-        ${PLAYERS.map(player => `
-          <button class="player-card" onclick="setPlayer('${player.id}', '${player.name}')">
+        ${PLAYERS.map(p => `
+          <div class="player-card" onclick="window.setPlayer('${p.id}', '${p.name}')">
             <div class="player-photo">
-              <img src="${player.image}" alt="${player.name}" onerror="this.style.display='none'">
+              <img src="${p.image}" alt="${p.name}" onerror="this.src='https://giantx.gg/wp-content/uploads/2024/01/logo-header.png'">
             </div>
-            <div class="player-name">${player.name}</div>
-            <div class="player-role">${player.role}</div>
-          </button>
+            <div class="player-name">${p.name}</div>
+          </div>
         `).join('')}
       </div>
-      <button class="secondary-btn" onclick="prevScreen()">Back to Players</button>
+      <button class="secondary-btn" onclick="prevScreen()">Back to Role</button>
     </div>
-  `,
+  `;
+  },
   photo: () => `
     ${headerComponent()}
     <div class="screen">
