@@ -214,13 +214,14 @@ function generatePrompt(role, style, hasPhoto = false, playersCount = 0) {
   const mandatoryMandate = `
 MANDATORY ROLE ASSIGNMENT:
 - IMAGE 1 IS THE PRIMARY PROTAGONIST (The Fan). You MUST include this person as the central focus of the image. This is NON-NEGOTIABLE.
-- IMAGES 2 to ${playersCount + 1} ARE THE SECONDARY TEAMMATES (The Pro Players).`;
+- IMAGES 2 to ${playersCount + 1} ARE THE SECONDARY TEAMMATES (The Pro Players). Use their EXACT FACIAL FEATURES and hair. Do NOT use generic models.
+- TEAM IDENTITY MANDATE: The faces from Images 2, 3, 4, and 5 must be clearly recognizable as the teammates in the final composition.`;
 
   // Prompt base original adaptado para composición multimodal con LÍMITE ESTRICTO
   const basePrompt = `A high-impact esports poster composition featuring EXACTLY ${playersCount + 1} unique individuals.
 - TOTAL PEOPLE COUNT: STICK TO EXACTLY ${playersCount + 1} PEOPLE. NO MORE, NO LESS.
 - THE FAN (Image 1): Central subject, foreground, largest scale. The entire poster revolves around this person.
-- ${playersCount} UNIQUE PROFESSIONAL PLAYERS (Images 2 to ${playersCount + 1}): Arranged around the fan.
+- ${playersCount} UNIQUE PROFESSIONAL PLAYERS (Images 2 to ${playersCount + 1}): Arranged around the fan. THE AI MUST REPLICATE THEIR FACES FROM THE SOURCE IMAGES. NO GENERIC FACES ALLOWED.
 - OFFICIAL JERSEY REFERENCE (Last Image): Use this image as the ABSOLUTE visual blueprint for the uniforms.
   
 MANDATORY: Every person in the generated image must be wearing the EXACT jersey shown in the Last Image (Official Jersey Reference). Match the blue and black stripes, the "GX" logo, and the white details perfectly.`;
@@ -261,6 +262,7 @@ INDIVIDUAL PORTRAIT TASK:
   const negativePrompt = `
 AVOID:
 - Generic faces
+- Inventing new people not present in the ${playersCount + 1} provided source images
 - Extra faces not corresponding to input images
 - Duplicating people
 - More than 1 person if 'Social Media Avatar' is selected
