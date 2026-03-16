@@ -18,7 +18,7 @@ let state = {
 const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 const API_BASE = isLocal 
   ? 'http://localhost:3001' 
-  : 'https://cloud9-roster-moment.onrender.com';
+  : 'https://giantx-fan-moment.onrender.com';
 
 const PLAYERS = [
   { id: 'player1', name: 'Lot', role: 'Top', image: `${API_BASE}/api/players/player1.png` },
