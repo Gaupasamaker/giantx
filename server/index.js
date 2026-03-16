@@ -394,7 +394,10 @@ app.post(['/generate', '/api/generate'], async (req, res) => {
     try {
       console.log('Sending request to Google AI...');
       result = await model.generateContent({
-        contents: [{ role: 'user', parts: contentParts }]
+        contents: [{ role: 'user', parts: contentParts }],
+        generationConfig: {
+          responseModalities: ['IMAGE']
+        }
       });
     } catch (genError) {
       log('CRITICAL: generateContent failed!');

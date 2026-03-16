@@ -148,7 +148,7 @@ const screens = {
     ${headerComponent()}
     <div class="screen generating-screen">
       <div class="loader-container">
-        <img src="/giantx-logo.png" alt="Giantx" class="loader-logo">
+        <img src="/logo-roster-moment.png" alt="Giantx" class="loader-logo">
         <div class="loader-ring"></div>
       </div>
       <div class="generating-text" id="generating-text">Initializing AI</div>
@@ -271,7 +271,15 @@ window.setStyle = (style) => {
 
 window.handleStyleSelection = (styleName) => {
   state.style = styleName;
-  render(); // Re-render to update the active class on buttons
+  
+  // Directly manipulate DOM to avoid full screen re-render (prevents flash)
+  document.querySelectorAll('.style-btn').forEach(btn => btn.classList.remove('active'));
+  
+  const activeId = 'style-' + styleName.replace(/\s+/g, '-');
+  const targetBtn = document.getElementById(activeId);
+  if (targetBtn) {
+    targetBtn.classList.add('active');
+  }
 };
 
 window.handleEmail = (event) => {
