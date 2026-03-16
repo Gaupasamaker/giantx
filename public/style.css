@@ -1,16 +1,21 @@
 :root {
-  --primary-bg: #000000; /* Black */
-  --secondary-bg: #0a0a0a;
-  --accent-blue: #0055ff; /* Giantx Electric Blue */
-  --accent-glow: rgba(0, 85, 255, 0.5);
-  --accent-cyan: #00aaff;
-  --text-white: #ffffff;
-  --text-dim: #a0a0a0;
-  --button-bg: rgba(0, 85, 255, 0.1);
-  --button-hover: rgba(0, 85, 255, 0.2);
-  --card-bg: rgba(255, 255, 255, 0.03);
-  --gradient-primary: linear-gradient(135deg, #0055ff 0%, #00aaff 100%);
-  --gradient-dark: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
+  /* Color Palette - Premium Dark Modern */
+  --primary-bg: #05070a; 
+  --secondary-bg: #0a0e14;
+  --accent-blue: #00d2ff; /* Giantx Electric Cyan */
+  --accent-purple: #7000ff; /* Giantx Deep Purple Accent */
+  --accent-glow: rgba(0, 210, 255, 0.3);
+  --text-white: #f8faff;
+  --text-dim: #8a94ad;
+  --button-bg: rgba(0, 210, 255, 0.05);
+  --button-hover: rgba(0, 210, 255, 0.15);
+  --card-bg: rgba(255, 255, 255, 0.02);
+  --glass-bg: rgba(10, 14, 20, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  
+  --gradient-primary: linear-gradient(135deg, #00d2ff 0%, #7000ff 100%);
+  --gradient-dark: linear-gradient(180deg, #05070a 0%, #0a0e14 100%);
+  --shadow-premium: 0 20px 40px rgba(0, 0, 0, 0.6);
 }
 
 /* ==================== GIANTX HEADER ==================== */
@@ -78,45 +83,49 @@
 /* ==================== BOTONES MEJORADOS ==================== */
 .primary-btn {
   background: var(--gradient-primary);
-  color: var(--primary-bg);
+  color: #ffffff;
   border: none;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 10px 20px rgba(0, 210, 255, 0.2);
 }
 
 .primary-btn:hover {
-  box-shadow: 0 0 30px var(--accent-glow);
-  transform: translateY(-2px);
+  box-shadow: 0 0 40px var(--accent-glow);
+  transform: translateY(-3px) scale(1.02);
 }
 
 .upload-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px dashed rgba(255, 255, 255, 0.2);
+  background: var(--glass-bg);
+  border: 2px dashed var(--glass-border);
+  box-shadow: var(--shadow-premium);
 }
 
 .upload-btn:hover {
   border-style: solid;
   border-color: var(--accent-blue);
-  background: rgba(0, 174, 239, 0.1);
+  background: var(--button-hover);
 }
 
 .generate-btn {
   margin-top: 1rem;
   background: var(--gradient-primary);
-  color: var(--primary-bg);
+  color: #ffffff;
   font-size: 1.2rem;
   border: none;
-  animation: pulse-glow 2s infinite;
+  animation: pulse-glow-premium 3s infinite ease-in-out;
+  box-shadow: 0 15px 30px rgba(112, 0, 255, 0.3);
 }
 
-@keyframes pulse-glow {
-
-  0%,
-  100% {
-    box-shadow: 0 0 10px var(--accent-glow);
+@keyframes pulse-glow-premium {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.3), 0 0 40px rgba(112, 0, 255, 0.2);
+    transform: scale(1);
   }
-
   50% {
-    box-shadow: 0 0 30px var(--accent-glow), 0 0 60px rgba(0, 174, 239, 0.3);
+    box-shadow: 0 0 40px rgba(0, 210, 255, 0.5), 0 0 70px rgba(112, 0, 255, 0.4);
+    transform: scale(1.02);
   }
 }
 
@@ -129,11 +138,12 @@
 .email-input-container {
   margin-top: 2rem;
   text-align: left;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--glass-bg);
   padding: 1.5rem;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-premium);
 }
 
 .email-label {
@@ -325,19 +335,20 @@
   flex-direction: column;
   align-items: center;
   padding: 1.5rem 1rem;
-  background: rgba(0, 174, 239, 0.05);
-  border: 1px solid rgba(0, 174, 239, 0.2);
-  border-radius: 12px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   width: auto;
+  box-shadow: var(--shadow-premium);
 }
 
 .role-card:hover {
-  transform: translateY(-5px);
-  background: rgba(0, 174, 239, 0.15);
+  transform: translateY(-10px);
+  background: var(--button-hover);
   border-color: var(--accent-blue);
-  box-shadow: 0 10px 30px rgba(0, 174, 239, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 210, 255, 0.2);
 }
 
 .role-card:active {
@@ -403,18 +414,19 @@
   flex-direction: column;
   align-items: center;
   padding: 1rem 0.5rem;
-  background: rgba(0, 174, 239, 0.05);
-  border: 1px solid rgba(0, 174, 239, 0.2);
-  border-radius: 12px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: var(--shadow-premium);
 }
 
 .player-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  background: rgba(0, 174, 239, 0.15);
+  transform: translateY(-8px) scale(1.05);
+  background: var(--button-hover);
   border-color: var(--accent-blue);
-  box-shadow: 0 10px 30px rgba(0, 174, 239, 0.3);
+  box-shadow: 0 15px 40px rgba(0, 210, 255, 0.25);
 }
 
 .player-photo {
@@ -637,17 +649,17 @@ input[type="email"]:focus {
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .dot.active {
-  background: var(--accent-blue);
-  box-shadow: 0 0 10px var(--accent-blue);
-  transform: scale(1.3);
+  background: var(--gradient-primary);
+  box-shadow: 0 0 15px var(--accent-glow);
+  transform: scale(1.5);
 }
 
 .grid button.style-btn.selected {
