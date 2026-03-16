@@ -391,6 +391,7 @@ app.post(['/generate', '/api/generate'], async (req, res) => {
     console.log('Total images sent:', contentParts.length - 1);
 
     let result;
+    const startTime = Date.now();
     try {
       console.log('Sending request to Google AI...');
       result = await model.generateContent({
@@ -399,6 +400,8 @@ app.post(['/generate', '/api/generate'], async (req, res) => {
           responseModalities: ['IMAGE']
         }
       });
+      const endTime = Date.now();
+      console.log(`AI Response time: ${(endTime - startTime) / 1000}s`);
     } catch (genError) {
       log('CRITICAL: generateContent failed!');
       log(`Error Status: ${genError.status || 'N/A'}`);
@@ -470,7 +473,7 @@ app.post(['/generate', '/api/generate'], async (req, res) => {
           // USAR imageData directamente que está definido en el scope del for
           res.json({
             success: true,
-            message: 'Roster Moment generated',
+            message: 'Fan Moment generated',
             imageUrl,
             imageName: fileName, // Enviamos el nombre del archivo para el QR
             imageBase64: imageData,
@@ -616,7 +619,7 @@ app.get('/gallery', (req, res) => {
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🎮 Roster Moment Backend running at:`);
+  console.log('🎮 Fan Moment Backend running at:');
   console.log(`   Local:   http://localhost:${PORT}`);
   console.log(`   Network: http://${LOCAL_IP}:${PORT}`);
 });

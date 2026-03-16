@@ -38,7 +38,7 @@ const headerComponent = () => `
 const screens = {
   role: () => `
     <header class="home-header">
-      <img src="/logo-roster-moment.png" alt="Roster Moment" class="main-logo-hero">
+      <img src="/logo-roster-moment.png" alt="Fan Moment" class="main-logo-hero">
     </header>
     <div class="screen">
       <p class="subtitle">Join the Team</p>
@@ -148,11 +148,11 @@ const screens = {
     ${headerComponent()}
     <div class="screen generating-screen">
       <div class="loader-container">
-        <img src="/logo-roster-moment.png" alt="Giantx" class="loader-logo">
+        <img src="/logo-roster-moment.png" alt="Fan Moment" class="loader-logo">
         <div class="loader-ring"></div>
       </div>
       <div class="generating-text" id="generating-text">Initializing AI</div>
-      <p class="subtitle-dim" id="generating-subtitle">Preparing your epic moment...</p>
+      <p class="subtitle-dim" id="generating-subtitle">Preparing your epic Fan Moment...</p>
       <div id="status-log" class="status-log">
         Establishing secure uplink...
       </div>
@@ -179,13 +179,13 @@ const screens = {
       ? state.generatedImage
       : `${API_BASE}/generated/${state.generatedImageName || ''}`;
 
-    const twitterText = encodeURIComponent(`🎮 Just joined the @GIANTX roster! Check out my Roster Moment! 🏆\n\n#GIANTX #Esports #RosterMoment`);
+    const twitterText = encodeURIComponent(`🎮 Just joined the @GIANTX roster! Check out my Fan Moment! 🏆\n\n#GIANTX #Esports #FanMoment`);
     const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}&url=${encodeURIComponent(qrUrl)}`;
 
     return `
     ${headerComponent()}
     <div class="screen">
-      <h1 class="result-title">🏆 YOUR ROSTER MOMENT</h1>
+      <h1 class="result-title">🏆 YOUR FAN MOMENT</h1>
       <div class="result-card">
         ${state.generatedImage
         ? `<img src="${state.generatedImage}" class="photo-preview-large" alt="Generated poster" onclick="window.zoomImage()">`
@@ -254,11 +254,38 @@ window.handlePhoto = (event) => {
     container.innerHTML = `<img src="${state.photo}" class="photo-preview" alt="Preview">`;
     document.getElementById('nextBtn').disabled = false;
 
-    // Convertir a base64 para enviar al servidor
+    // Convertir y comprimir a base64 para enviar al servidor
     const reader = new FileReader();
-    reader.onloadend = () => {
-      // Guardar el base64 completo (incluye el prefijo data:image/...)
-      state.photoBase64 = reader.result;
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+        const MAX_SIZE = 1024;
+        
+        if (width > height) {
+          if (width > MAX_SIZE) {
+            height *= MAX_SIZE / width;
+            width = MAX_SIZE;
+          }
+        } else {
+          if (height > MAX_SIZE) {
+            width *= MAX_SIZE / height;
+            height = MAX_SIZE;
+          }
+        }
+        
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        // Comprimir a JPEG 0.8 calidad
+        state.photoBase64 = canvas.toDataURL('image/jpeg', 0.8);
+        console.log('Photo compressed. Size reduced significantly.');
+      };
+      img.src = e.target.result;
     };
     reader.readAsDataURL(file);
   }
@@ -323,7 +350,7 @@ window.downloadImage = () => {
 
 // Compartir en Instagram (copiar texto y mostrar instrucciones)
 window.shareInstagram = () => {
-  const instagramText = `🎮 Just joined the @giantx roster! Check out my Roster Moment! 🏆\n\n#Giantx #Esports #RosterMoment #Gaming`;
+  const instagramText = `🎮 Just joined the @giantx roster! Check out my Fan Moment! 🏆\n\n#Giantx #Esports #FanMoment #Gaming`;
 
   navigator.clipboard.writeText(instagramText).then(() => {
     alert('✅ Caption copied to clipboard!\n\n1. Download your image using the Download button\n2. Open Instagram and create a new post\n3. Select your poster image\n4. Paste the caption (Ctrl+V / Cmd+V)');
@@ -415,6 +442,10 @@ window.nextScreen = async () => {
       // Fallback: Si el servidor envía la imagen en Base64, usarla (más fiable en producción)
       if (data.imageBase64) {
         state.generatedImage = `data:image/jpeg;base64,${data.imageBase64}`;
+      }
+
+      if (data.message && data.message.includes('Roster')) {
+        data.message = data.message.replace('Roster', 'Fan');
       }
 
       if (data.imageName) {

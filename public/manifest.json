@@ -1,17 +1,21 @@
 {
-  "name": "Giantx Roster Moment",
-  "short_name": "Roster",
+  "name": "Giantx Fan Moment",
+  "short_name": "Fan Moment",
   "description": "Create your epic poster with the Giantx team",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",
-  "theme_color": "#000000",
+  "theme_color": "#00d2ff",
   "icons": [
     {
       "src": "/logo-roster-moment.png",
-      "sizes": "1024x1024",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo-roster-moment.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ]
 }
