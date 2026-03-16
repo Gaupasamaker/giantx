@@ -179,7 +179,7 @@ const screens = {
       ? state.generatedImage
       : `${API_BASE}/generated/${state.generatedImageName || ''}`;
 
-    const twitterText = encodeURIComponent(`🎮 Just joined the @GIANTX roster! Check out my Fan Moment! 🏆\n\n#GIANTX #Esports #FanMoment`);
+    const twitterText = encodeURIComponent(`🎮 Just joined the @GIANTX team! Check out my Fan Moment! 🏆\n\n#GIANTX #Esports #FanMoment`);
     const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}&url=${encodeURIComponent(qrUrl)}`;
 
     return `
@@ -342,7 +342,7 @@ window.downloadImage = () => {
 
   const link = document.createElement('a');
   link.href = state.generatedImage;
-  link.download = `roster-moment-${state.role.toLowerCase()}-${Date.now()}.png`;
+  link.download = `fan-moment-${state.role.toLowerCase()}-${Date.now()}.png`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -350,7 +350,7 @@ window.downloadImage = () => {
 
 // Compartir en Instagram (copiar texto y mostrar instrucciones)
 window.shareInstagram = () => {
-  const instagramText = `🎮 Just joined the @giantx roster! Check out my Fan Moment! 🏆\n\n#Giantx #Esports #FanMoment #Gaming`;
+  const instagramText = `🎮 Just joined the @giantx team! Check out my Fan Moment! 🏆\n\n#Giantx #Esports #FanMoment #Gaming`;
 
   navigator.clipboard.writeText(instagramText).then(() => {
     alert('✅ Caption copied to clipboard!\n\n1. Download your image using the Download button\n2. Open Instagram and create a new post\n3. Select your poster image\n4. Paste the caption (Ctrl+V / Cmd+V)');
