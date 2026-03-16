@@ -118,15 +118,15 @@ const screens = {
       <h2>Finalize Your Poster</h2>
       <p class="subtitle-dim">Choose your artistic style</p>
       <div class="grid">
-        <button class="style-btn" 
+        <button class="style-btn ${state.style === 'Painted Hype' ? 'active' : ''}" 
                 id="style-Painted-Hype" 
-                onclick="window.handleStyleSelection('Painted Hype', this)">🎨 Painted Hype</button>
-        <button class="style-btn" 
+                onclick="window.handleStyleSelection('Painted Hype')">🎨 Painted Hype</button>
+        <button class="style-btn ${state.style === 'Hype Match Day' ? 'active' : ''}" 
                 id="style-Hype-Match-Day" 
-                onclick="window.handleStyleSelection('Hype Match Day', this)">⚡ Hype Match Day</button>
-        <button class="style-btn" 
+                onclick="window.handleStyleSelection('Hype Match Day')">⚡ Match Day</button>
+        <button class="style-btn ${state.style === 'Social Media Avatar' ? 'active' : ''}" 
                 id="style-Social-Media-Avatar" 
-                onclick="window.handleStyleSelection('Social Media Avatar', this)">👤 Pro Avatar</button>
+                onclick="window.handleStyleSelection('Social Media Avatar')">👤 Pro Avatar</button>
       </div>
       
       <div class="email-input-container">
@@ -136,11 +136,6 @@ const screens = {
         <label class="consent-label">
           <input type="checkbox" id="consentCheckbox" ${state.consent ? 'checked' : ''} onchange="handleConsent(event)">
           <span class="consent-text">I agree to receive my poster via email and communications from Giantx</span>
-        </label>
-        
-        <label class="consent-label">
-          <input type="checkbox" id="galleryCheckbox" ${state.showInGallery ? 'checked' : ''} onchange="handleGalleryConsent(event)">
-          <span class="consent-text">🖼️ Show my poster in the event gallery</span>
         </label>
       </div>
       
@@ -274,16 +269,9 @@ window.setStyle = (style) => {
   nextScreen();
 };
 
-window.handleStyleSelection = (style, element) => {
-  state.style = style;
-
-  // Actualización parcial del DOM para evitar el "flash" de render()
-  const btns = document.querySelectorAll('.style-btn');
-  btns.forEach(btn => btn.classList.remove('selected'));
-
-  if (element) {
-    element.classList.add('selected');
-  }
+window.handleStyleSelection = (styleName) => {
+  state.style = styleName;
+  render(); // Re-render to update the active class on buttons
 };
 
 window.handleEmail = (event) => {
