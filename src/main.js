@@ -183,7 +183,7 @@ const screens = {
       ? state.generatedImage
       : `${API_BASE}/generated/${state.generatedImageName || ''}`;
 
-    const twitterText = encodeURIComponent(`🎮 Just joined the @Giantx roster! Check out my Roster Moment! 🏆\n\n#Giantx #Esports #RosterMoment`);
+    const twitterText = encodeURIComponent(`🎮 Just joined the @GIANTX roster! Check out my Roster Moment! 🏆\n\n#GIANTX #Esports #RosterMoment`);
     const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}&url=${encodeURIComponent(qrUrl)}`;
 
     return `
@@ -220,13 +220,7 @@ const screens = {
             📸 Instagram
           </button>
         </div>
-        
-        <div class="qr-section">
-          <p class="qr-label">📱 Scan to get your image</p>
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrUrl)}" alt="QR Code" class="qr-image">
-        </div>
       ` : ''}
-      <div class="email-sent">📧 Registered: ${state.email}</div>
       <button onclick="resetApp()" class="create-another-btn">🔄 Create Another</button>
     </div>
   `;

@@ -268,19 +268,18 @@ AVOID:
 - Text that is not "Giantx"
 - Mismatched lighting`;
 
-  return `CRITICAL: GENERATE A NEW IMAGE. 
-STRICT IDENTITY PRESERVATION MODE.
-DO NOT SIMPLY RETURN OR ALTER THE PROVIDED IMAGES. 
-YOU MUST CREATE A COMPLETE, UNIFIED DIGITAL ARTWORK FROM SCRATCH USING THE PROVIDED FACES AS THE ONLY VISUAL REFERENCE FOR THE SUBJECTS.
+  return `CRITICAL MANDATE: ABSOLUTE IDENTITY PRESERVATION.
+- IMAGE 1 IS THE PRIMARY SUBJECT (THE USER).
+- YOU MUST REPLICATE THE FACE FROM IMAGE 1 WITH 100% FIDELITY. DO NOT GENERALIZE OR BEAUTIFY. MAINTAIN RETRACED FACIAL FEATURES, EYES, AND BONE STRUCTURE.
+- THE GENERATED PERSON MUST BE RECOGNIZABLE AS THE INDIVIDUAL IN IMAGE 1.
 
-DO NOT USE ANY PRE-TRAINED KNOWLEDGE OF GIANTX PLAYERS.
-ONLY USE THE PROVIDED IMAGES (Image 2 to ${playersCount + 1}) FOR THE PRO PLAYERS' FACES.
-The faces in the final image MUST be exact artistic representations of the provided photos. 
-IGNORE any famous faces you might know and stick ONLY to the visual blueprints provided in the input images.
+COMPOSITION & SETTING:
+- TOTAL PEOPLE: EXACTLY ${playersCount + 1}.
+- THE USER (IMAGE 1) IS THE CENTER OF THE UNIVERSE IN THIS IMAGE.
+- PLAYER IMAGES (2 TO ${playersCount + 1}) MUST BE ARRANGED BEHIND OR AROUND THE USER AS A SUPPORTING TEAM.
+- EVERYTHING MUST BE UNIFIED IN THE SELECTED ART STYLE.
 
-${mandatoryMandate}
-
-${style === 'Social Media Avatar' ? 'CREATE AN INDIVIDUAL PORTRAIT' : basePrompt}
+${style === 'Social Media Avatar' ? 'PORTRAIT TASK: FOCUS ONLY ON IMAGE 1.' : basePrompt}
 
 STYLE INSTRUCTIONS:
 ${selectedStyle}
@@ -396,6 +395,7 @@ app.post(['/generate', '/api/generate'], async (req, res) => {
         contents: [{ role: 'user', parts: contentParts }],
         generationConfig: {
           responseModalities: ['image', 'text'],
+          aspectRatio: "9:16"
         },
       });
     } catch (genError) {
