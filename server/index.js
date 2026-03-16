@@ -133,17 +133,17 @@ async function sendPosterEmail(toEmail, imageDataBase64) {
         'content-type': 'application/json'
       },
       body: JSON.stringify({
-        sender: { name: "Roster Moment", email: senderEmail },
+        sender: { name: "Giantx Fan Moment", email: senderEmail },
         to: [{ email: toEmail }],
-        subject: "Your Giantx Roster Moment is here! 🏆",
+        subject: "Your Giantx Fan Moment is here! 🏆",
         htmlContent: `
           <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto;">
             <h2 style="color: #0055ff;">Hi! Here is your epic Giantx poster.</h2>
-            <p>We hope you like it! You can share this epic moment on your social media. Don't forget to tag <strong>@Giantx</strong> and use <strong>#RosterMoment</strong>!</p>
+            <p>We hope you like it! You can share this epic moment on your social media. Don't forget to tag <strong>@Giantx</strong> and use <strong>#FanMoment</strong>!</p>
             <p>Thanks for your support!</p>
             <br>
             <p><strong>The Giantx Team</strong></p>
-            <img src="https://giantx-fan-moment.onrender.com/giantx-logo.png" alt="Giantx" style="width: 100px; margin-top: 10px;">
+            <img src="https://giantx-fan-moment.onrender.com/fan-moment-logo.png" alt="Giantx" style="width: 150px; margin-top: 20px;">
           </div>
         `,
         attachment: [
@@ -233,6 +233,7 @@ MANDATORY: Every person in the generated image must be wearing the EXACT jersey 
 STYLE: Masterpiece Esports Digital Illustration.
 - Clothing: ${jerseyDescription}
 - Technique: Thick, expressive oil-painting style with visible palette knife textures and bold brush strokes.
+- MANDATORY: ALL individuals in the image must be unified in this painted style. No one should appear as a photorealistic person. Every face, hair, and clothing part must have visible painterly textures.
 - Color Palette: Dominant Giantx colors (deep black, electric blue), with cinematic highlights.
 - Lighting: Intense, dramatic "Rembrandt" lighting on faces.
 - Energy: Dynamic paint splashes and energy wisps.
@@ -331,7 +332,10 @@ app.post(['/generate', '/api/generate'], async (req, res) => {
 
       // Si el estilo es 'Social Media Avatar', NO añadimos jugadores para evitar confusiones.
       // Solo añadimos jugadores para los estilos de composición grupal.
-      const selectedPlayers = (style === 'Social Media Avatar') ? [] : playerFiles.slice(0, 5);
+      // OPTIMIZACIÓN: Elegir 2 o 3 jugadores AL AZAR para mejorar la fidelidad de las caras.
+      const shuffled = playerFiles.sort(() => 0.5 - Math.random());
+      const teammateCount = Math.floor(Math.random() * 2) + 2; // Devuelve 2 o 3
+      const selectedPlayers = (style === 'Social Media Avatar') ? [] : shuffled.slice(0, teammateCount);
       playersCount = selectedPlayers.length;
 
       // El fan (la foto del usuario) DEBE ir primero según nuestro nuevo prompt
